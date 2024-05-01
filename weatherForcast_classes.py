@@ -51,7 +51,7 @@ def get_coordinates(city):
 weather = WeatherForecast("weather.txt")
 
 while True:
-    choice = input("Please type:\n1. for existing weather info.\n2. Other weather news:\n3. to Exit\n")
+    choice = input("Please type:\n1. for existing weather info.\n2. Other weather news:\n3. To  iter\n4. To set Item\n5. To get Item\n6. To Exit\n")
     if choice == "1":
         weather.load_from_file()
         print(list(weather.items()))
@@ -104,16 +104,23 @@ while True:
         else:
             print("Invalid date format entered. Please use yyyy-mm-dd format.")
             continue
-    elif choice == "3":
-        break
-    elif choice == "set":
+
+    elif choice == "4":
         date = input("Enter the date (yyyy-mm-dd): ")
         forecast = input("Enter the weather forecast: ")
         weather[date] = forecast
         weather.save_to_file()
-    elif choice == "iter":
+    elif choice == "3":
         print("Weather forecasts for the known dates:")
         for date in weather:
             print(f"{date}: {weather[date]}")
+    elif choice == "5":
+        date = input("Enter the date (yyyy-mm-dd) to get the weather forecast: ")
+        if date in weather:
+            print(f"{date}: {weather[date]}")
+        else:
+            print("Weather forecast not found for the given date.")
+    elif choice == "6":
+        break
     else:
         print("Invalid choice. Please try again.")
